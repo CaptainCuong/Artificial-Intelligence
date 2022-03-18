@@ -1,12 +1,16 @@
 import cv2 as cv
-# vid = cv.VideoCapture(0)
+import numpy as np
+vid = cv.VideoCapture(0)
 # print(dir(vid))
-# # print(frame.read())
-# for i in range(100):
-# 	ret, frame = vid.read()
-# 	cv.imshow('sdf', frame)
-# 	print(cv.waitKey(1))
-# cv.inRange()
+lowerWhite = np.array([80,0,0])
+upperWhite = np.array([255,160,255])
 
-print(help(cv.createTrackbar))
-print(help(cv.getTrackbarPos))
+while True:
+	ret, frame = vid.read()
+	cv.imshow('sdf', frame)
+	cv.inRange(frame,lowerWhite,upperWhite)
+	if cv.waitKey(1) & 0xFF == ord('q'):
+		break
+
+# print(help(cv.createTrackbar))
+# print(help(cv.getTrackbarPos))

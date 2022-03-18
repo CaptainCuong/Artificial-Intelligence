@@ -1,5 +1,4 @@
 import numpy as np
-import cv2
  
 def thresholding(img):
     imgHsv = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
