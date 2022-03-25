@@ -3,7 +3,7 @@ import cv2
    
 # Create an object to read 
 # from camera
-video = cv2.VideoCapture(0)
+video = cv2.VideoCapture(1)
    
 # We need to check if camera
 # is opened previously or not
@@ -20,9 +20,10 @@ size = (frame_width, frame_height)
 # Below VideoWriter object will create
 # a frame of above defined The output 
 # is stored in 'filename.avi' file.
-result = cv2.VideoWriter('../filename.avi', 
-                         cv2.VideoWriter_fourcc(*'MJPG'),
-                         10, size)
+# result = cv2.VideoWriter('../filename.avi', 
+#                          cv2.VideoWriter_fourcc(*'MJPG'),
+#                          10, size)
+
     
 while(True):
     ret, frame = video.read()
@@ -31,7 +32,7 @@ while(True):
   
         # Write the frame into the
         # file 'filename.avi'
-        result.write(frame)
+        # result.write(frame)
   
         # Display the frame
         # saved in the file
