@@ -1,6 +1,9 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import normalize
+from math import atan2
+import math
 
 path = './Capture.PNG'
 window_name = 'HSV'
@@ -37,11 +40,20 @@ while True:
     # 
 
     # Histogram
-    reduce_mask = mask[int(mask.shape[0]/3*2):,:]/255
-    histogram = np.sum(reduce_mask, axis=0)
-    print(reduce_mask.shape)
-    plt.bar(list(range(0,histogram.shape[0])),histogram)
-    print(np.percentile(histogram, [50]))
+    upper_area = int(mask.shape[0]/3*2)
+    lower_area = int(mask.shape[0]/9*7)
+    reduce_mask = mask[upper_area:lower_area,:]/255
+    bar = np.sum(reduce_mask, axis=0)
+    bar = np.cumsum(bar)
+    pct_50 = bar[-1]/2
+    w_pointx = np.sum([x < pct_50 for x in bar])
+    w_pointy = (lower_area+upper_area)/2
+    H = mask.shape[0]
+    W = mask.shape[1]
+    # print(ind_50)
+    print(atan2(H - w_pointy, w_pointx - W/2)/math.pi*180)
+
+    plt.bar(list(range(0,bar.shape[0])),bar)
     # plt.xlabel(range(160, 20))
     plt.show(block=False)
     plt.pause(3)
